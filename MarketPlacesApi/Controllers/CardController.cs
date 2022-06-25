@@ -1,4 +1,6 @@
-﻿using MarketPlacesApi.Models;
+﻿using AutoMapper;
+using MarketPlacesApi.Helpers;
+using MarketPlacesApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,11 +15,9 @@ namespace MarketPlacesApi.Controllers
     [Route("api/v{version:apiVersion}/[controller]")]
     public class CardController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
+        //private readonly IFoodRepository _foodRepository;
+        private readonly IUrlHelper _urlHelper;
+        private readonly IMapper _mapper;
         private readonly ILogger<CardController> _logger;
 
         public CardController(ILogger<CardController> logger)
@@ -25,37 +25,29 @@ namespace MarketPlacesApi.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
-        {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
-
         [HttpPost(Name = nameof(FindCard))]
-        public ActionResult<Card> FindCard(ApiVersion version, [FromBody] ApplicantDetail applicantDetailDto)
-        {
+        public ActionResult<Card> FindCard([FromBody] ApplicantDetailDto applicantDetailDto)
+        {       
+            if (ModelState.IsValid && applicantDetailDto != null)
+            {
+                if (!CardHelper.IsApplicantAbove18(applicantDetailDto.DateOfBirth.Value))
+                {
+                    return new JsonResult(new Response { Message = "no credit cards are available" });
+                }
 
 
 
+        
+                
 
-
+       
+            }
+            else
+            {
+                return BadRequest();
+            }
+    
             return Ok(new Card { });
         }
-
-
-
-
-
-
-
     }
-
-
 }

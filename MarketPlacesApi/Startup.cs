@@ -1,3 +1,6 @@
+using MarketPlacesApi.Data;
+using MarketPlacesApi.Interfaces;
+using MarketPlacesApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -5,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -30,23 +34,16 @@ namespace MarketPlacesApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSingleton<ISeedDataService, SeedDataServices>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MarketPlacesApi", Version = "v1" });
             });
-            services.AddCustomCors("AllowAllOrigins");
-            services.AddRouting(options => options.LowercaseUrls = true);
 
-            services.AddScoped<IUrlHelper>(x =>
-            {
-                var actionContext = x.GetRequiredService<IActionContextAccessor>().ActionContext;
-                var factory = x.GetRequiredService<IUrlHelperFactory>();
-                return factory.GetUrlHelper(actionContext);
-            });
+            services.AddApiVersioning();
 
-            services.AddVersioning();
-
-
+            services.AddDbContext<MarketPlacesContext>(options => options.UseSqlServer(
+                Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,6 +66,27 @@ namespace MarketPlacesApi
             {
                 endpoints.MapControllers();
             });
+
+            InitializeDB(app.ApplicationServices);
+        }
+
+        private void InitializeDB(IServiceProvider services)
+        {
+            using (var scope = services.CreateScope())
+            {
+                var _services = scope.ServiceProvider;
+                try
+                {
+                    var context = _services.GetRequiredService<MarketPlacesContext>();
+                    var dbInitializer = _services.GetRequiredService<ISeedDataService>();
+                    dbInitializer.Initialize(context).GetAwaiter().GetResult();
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Startup>>();
+                    logger.LogError(ex, "An error occurred while seeding the database.");
+                }
+            }
         }
     }
 }
