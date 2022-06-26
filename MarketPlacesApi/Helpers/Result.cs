@@ -9,6 +9,6 @@ namespace MarketPlacesApi.Models
     {
         public bool Success { get; set; }
         public string Error { get; set; }
-        public T value { get; set; }
+        public T value  { get; set; } 
     }
 }

@@ -5,7 +5,7 @@ namespace MarketPlacesApi.Models
 {
     public class Response
     {
-        public List<Card>  Cards { get; set; }
         public string Message { get; set; }
+        public List<Card> Cards { get; set; } = new List<Card>();
     }
 }

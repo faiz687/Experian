@@ -2,9 +2,12 @@
 using MarketPlaces.Entity.Models;
 using MarketPlacesApi.Interfaces;
 using MarketPlacesApi.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MarketPlacesApi.Controllers
 {
@@ -13,44 +16,55 @@ namespace MarketPlacesApi.Controllers
     [Route("api/v{version:apiVersion}/[controller]")]
     public class CardController : ControllerBase
     {
-        //private readonly IFoodRepository _foodRepository;
-        private readonly IUrlHelper _urlHelper;
         private readonly IMapper _mapper;
         private readonly ILogger<CardController> _logger;
         private readonly IQualificationService _qualificationService;
+        private readonly ICardService _cardService;
 
-        public CardController(ILogger<CardController> logger, IQualificationService qualificationService)
+        public CardController(ILogger<CardController> logger, IQualificationService qualificationService, ICardService cardService)
         {
+            _cardService = cardService;
             _qualificationService = qualificationService;
             _logger = logger;
         }
 
         [HttpPost(Name = nameof(FindCard))]
-        public ActionResult<Card> FindCard([FromBody] ApplicantDetailDto applicantDetailDto)
-        {       
-            if (ModelState.IsValid && applicantDetailDto != null)
+        public async Task<IActionResult> FindCard([FromBody] ApplicantDetailDto applicantDetailDto)
+        {
+            try
             {
-                Result<string> result;
-
-                result = _qualificationService.IsApplicantEligible(applicantDetailDto);
-
-                if (!result.Success)
+                if (ModelState.IsValid && applicantDetailDto != null)
                 {
-                    return new JsonResult(result);
+                    var applicantEligibilityResult = _qualificationService.IsApplicantEligible(applicantDetailDto);
+
+                    if (!applicantEligibilityResult.Success)
+                    {
+                        Response response = new Response { Message = applicantEligibilityResult.value };
+                        return Ok(response);
+                    }
+
+                    var applicantCardsResult = await _cardService.FindCards(applicantDetailDto);
+
+                    if (applicantCardsResult.Success && applicantCardsResult.value.Any())
+                    {
+                        Response response = new Response
+                        {
+                            Cards = applicantCardsResult.value,
+                            Message = "You are eligible for the following cards"
+                        };
+
+                        return Ok(response);
+                    }
                 }
 
-                
-
-
-
-
-            }
-            else
-            {
                 return BadRequest();
+
             }
-    
-            return Ok(new Card { });
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"An Error occured while finding card for applicant with message {ex.Message}");
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }

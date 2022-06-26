@@ -10,7 +10,7 @@ namespace MarketPlaces.Entity.Context
         }
 
         public DbSet<Card> Cards { get; set; }
-        public DbSet<ApplicantDetail> ApplicantDetails { get; set; }
-
+        public DbSet<Applicant> Applicants { get; set; }
+        public DbSet<ApplicantCard> ApplicantCards { get; set; }
     }
 }

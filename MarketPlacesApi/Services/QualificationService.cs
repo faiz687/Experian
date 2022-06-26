@@ -15,9 +15,9 @@ namespace MarketPlacesApi.Services
                 //age check
                 if (applicantDetailDto.DateOfBirth.HasValue)
                 {
-                    if (!MarketPlacesHelper.IsApplicantAbove18(applicantDetailDto.DateOfBirth.Value))
+                    if (!MarketPlacesHelper.IsApplicant18(applicantDetailDto.DateOfBirth.Value))
                     {
-                        return new Result<string> { value = "Sorry, Your age does not meet the eligibility", Success = false };
+                        return new Result<string> { value = "Sorry, We do not have any Cards for you.", Success = false };
                     }
                 }
                 else

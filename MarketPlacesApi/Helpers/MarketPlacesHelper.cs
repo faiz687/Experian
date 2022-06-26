@@ -7,7 +7,7 @@ namespace MarketPlacesApi.Helpers
 {
     public static class MarketPlacesHelper
     {
-        public static bool IsApplicantAbove18(DateTime DateOfBirth)
+        public static bool IsApplicant18(DateTime DateOfBirth)
         {
             if (CalculateAge(DateOfBirth) >= 18)
             {

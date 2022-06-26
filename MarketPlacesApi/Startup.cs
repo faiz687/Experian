@@ -12,6 +12,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
+using MarketPlaces.Data.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MarketPlacesApi
 {
@@ -35,12 +37,16 @@ namespace MarketPlacesApi
             });
 
             services.AddApiVersioning();
-
             services.AddDbContext<MarketPlacesContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddSingleton<ISeedDataService, SeedDataService>();
             services.AddScoped<IQualificationService,QualificationService>();
+            services.AddScoped<ICardService, CardService>();
+            services.AddScoped<IApplicantCardRepository,ApplicantCardRepository>();
+            services.AddScoped<IApplicantRepository, ApplicantRepository>();
+            services.AddScoped<ICardRepository, CardRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
