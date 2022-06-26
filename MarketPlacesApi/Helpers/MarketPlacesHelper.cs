@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MarketPlacesApi.Helpers
 {
-    public static class CardHelper
+    public static class MarketPlacesHelper
     {
         public static bool IsApplicantAbove18(DateTime DateOfBirth)
         {

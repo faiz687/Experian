@@ -1,10 +1,7 @@
-﻿using MarketPlacesApi.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using MarketPlaces.Entity.Context;
 using System.Threading.Tasks;
 
-namespace MarketPlacesApi.Interfaces
+namespace MarketPlaces.Data.Interfaces
 {
     public interface ISeedDataService
     {

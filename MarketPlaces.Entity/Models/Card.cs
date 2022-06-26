@@ -1,4 +1,4 @@
-﻿namespace MarketPlacesApi.Models
+﻿namespace MarketPlaces.Entity.Models
 {
     public class Card
     {

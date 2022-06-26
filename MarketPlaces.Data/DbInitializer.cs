@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
-using MarketPlacesApi.Models;
-using Microsoft.Extensions.DependencyInjection;
+﻿using System.Linq;
+using MarketPlaces.Entity.Context;
+using MarketPlaces.Entity.Models;
 
-namespace MarketPlacesApi.Data
+namespace MarketPlaces.Data
 {
     public static class DbInitializer
     {
@@ -11,7 +10,7 @@ namespace MarketPlacesApi.Data
         {
             if (context.Cards.Any())
             {
-                return;   // DB has been seeded
+                return;  
             }
 
             var cards = new Card[]
@@ -47,6 +46,7 @@ namespace MarketPlacesApi.Data
             {
                 context.Cards.Add(card);
             }
+
             context.SaveChanges();          
         }
     }

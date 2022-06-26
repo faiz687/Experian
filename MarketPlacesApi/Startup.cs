@@ -1,13 +1,10 @@
-using MarketPlacesApi.Data;
+using MarketPlaces.Entity.Context;
+using MarketPlaces.Data.Interfaces;
+using MarketPlaces.Data.Services;
 using MarketPlacesApi.Interfaces;
 using MarketPlacesApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,9 +12,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MarketPlacesApi
 {
@@ -34,7 +28,7 @@ namespace MarketPlacesApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSingleton<ISeedDataService, SeedDataServices>();
+         
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MarketPlacesApi", Version = "v1" });
@@ -44,6 +38,9 @@ namespace MarketPlacesApi
 
             services.AddDbContext<MarketPlacesContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddSingleton<ISeedDataService, SeedDataService>();
+            services.AddScoped<IQualificationService,QualificationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

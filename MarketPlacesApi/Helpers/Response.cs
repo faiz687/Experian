@@ -1,7 +1,5 @@
-﻿using System;
+﻿using MarketPlaces.Entity.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MarketPlacesApi.Models
 {

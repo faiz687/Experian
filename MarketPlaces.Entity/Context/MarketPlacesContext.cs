@@ -1,7 +1,7 @@
-﻿using MarketPlacesApi.Models;
+﻿using MarketPlaces.Entity.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace MarketPlacesApi.Data
+namespace MarketPlaces.Entity.Context
 {
     public class MarketPlacesContext : DbContext
     {

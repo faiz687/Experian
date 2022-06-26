@@ -1,15 +1,13 @@
-﻿using MarketPlacesApi.Data;
-using MarketPlacesApi.Interfaces;
-using MarketPlacesApi.Models;
+﻿using MarketPlaces.Entity.Context;
+using MarketPlaces.Data.Interfaces;
+using MarketPlaces.Entity.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MarketPlacesApi.Services
+namespace MarketPlaces.Data.Services
 {
-    public class SeedDataServices : ISeedDataService
+    public class SeedDataService : ISeedDataService
     {
         public async Task Initialize(MarketPlacesContext context)
         {
