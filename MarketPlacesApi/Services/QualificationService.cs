@@ -1,36 +1,52 @@
 ﻿using MarketPlacesApi.Helpers;
 using MarketPlacesApi.Interfaces;
 using MarketPlacesApi.Models;
+using Microsoft.Extensions.Logging;
+using System;
 
 namespace MarketPlacesApi.Services
 {
     public class QualificationService : IQualificationService
     {
+        private readonly ILogger<QualificationService> _logger;
+
+        public QualificationService(ILogger<QualificationService> logger)
+        {
+            _logger = logger;
+        }
+
         public Result<string> IsApplicantEligible(ApplicantDetailDto applicantDetailDto)
         {
-            var result = new Result<string>();
-
-            if (applicantDetailDto != null)
+            var result = new Result<string> { Success = false };
+            try
             {
-                //age check
-                if (applicantDetailDto.DateOfBirth.HasValue)
+                if (applicantDetailDto != null)
                 {
-                    if (!MarketPlacesHelper.IsApplicant18(applicantDetailDto.DateOfBirth.Value))
+                    //age check
+                    if (applicantDetailDto.DateOfBirth.HasValue)
                     {
-                        return new Result<string> { value = "Sorry, We do not have any Cards for you.", Success = false };
+                        if (!MarketPlacesHelper.IsApplicantAbove18(applicantDetailDto.DateOfBirth.Value))
+                        {
+                            return new Result<string> { value = "no credit cards are available", Success = false };
+                        }
                     }
-                }
-                else
-                {
-                    return new Result<string> { value = "Date of Birth is required to determine eligibility", Success = false };
+                    else
+                    {
+                        return new Result<string> { value = "Date of Birth is required to determine eligibility", Success = false };
+                    }
+
+                    //additional checks in future??
+                    result.Success = true;
+                    return result;
                 }
 
-                //additional checks in future??
-
+                return result;
             }
-
-            result.Success = true;
-            return result;
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"An Error occured while Checking applicant eligibility with error message :  {ex.Message}");
+                return result;
+            }
         }
     }
 }

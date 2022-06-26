@@ -20,9 +20,11 @@ namespace MarketPlacesApi.Controllers
         private readonly ILogger<CardController> _logger;
         private readonly IQualificationService _qualificationService;
         private readonly ICardService _cardService;
+        private readonly IApplicantService _applicantService;
 
-        public CardController(ILogger<CardController> logger, IQualificationService qualificationService, ICardService cardService)
+        public CardController(ILogger<CardController> logger, IQualificationService qualificationService, ICardService cardService, IApplicantService applicantService)
         {
+            _applicantService = applicantService;
             _cardService = cardService;
             _qualificationService = qualificationService;
             _logger = logger;
@@ -53,6 +55,10 @@ namespace MarketPlacesApi.Controllers
                             Message = "You are eligible for the following cards"
                         };
 
+                        //save data
+                        var applicant = _mapper.Map<Applicant>(applicantDetailDto);
+                        var applicantDbResult = _applicantService.SaveApplicantWithResults(applicant, applicantCardsResult.value);
+                        
                         return Ok(response);
                     }
                 }

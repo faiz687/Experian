@@ -15,9 +15,9 @@ namespace MarketPlaces.Data.Repositories
             _context = context;
         }
 
-        public virtual async Task Add(TEntity obj)
+        public virtual async Task Add(TEntity entity)
         {
-            _context.Add(obj);
+            _context.Add(entity);
             await _context.SaveChangesAsync();
         }
 
@@ -31,15 +31,15 @@ namespace MarketPlaces.Data.Repositories
            return await _context.Set<TEntity>().FindAsync(id);
         }
          
-        public virtual async Task Remove(TEntity obj)
+        public virtual async Task Remove(TEntity entity)
         {
-            _context.Set<TEntity>().Remove(obj);
+            _context.Set<TEntity>().Remove(entity);
             await _context.SaveChangesAsync();
         }
 
-        public virtual async Task Update(TEntity obj)
+        public virtual async Task Update(TEntity entity)
         {
-            _context.Entry(obj).State = EntityState.Modified;
+            _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
 

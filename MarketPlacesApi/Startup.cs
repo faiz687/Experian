@@ -42,6 +42,7 @@ namespace MarketPlacesApi
 
             services.AddSingleton<ISeedDataService, SeedDataService>();
             services.AddScoped<IQualificationService,QualificationService>();
+            services.AddScoped<IApplicantService, ApplicantService>();
             services.AddScoped<ICardService, CardService>();
             services.AddScoped<IApplicantCardRepository,ApplicantCardRepository>();
             services.AddScoped<IApplicantRepository, ApplicantRepository>();
