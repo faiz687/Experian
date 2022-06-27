@@ -10,7 +10,7 @@ namespace MarketPlaces.Data
         {
             if (context.Cards.Any())
             {
-                return;  
+                return;
             }
 
             var cards = new Card[]
@@ -47,7 +47,7 @@ namespace MarketPlaces.Data
                 context.Cards.Add(card);
             }
 
-            context.SaveChanges();          
+            context.SaveChanges();
         }
     }
 }

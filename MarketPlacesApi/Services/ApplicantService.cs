@@ -1,6 +1,5 @@
 ﻿using MarketPlaces.Data.Interfaces;
 using MarketPlaces.Entity.Models;
-using MarketPlacesApi.Helpers;
 using MarketPlacesApi.Interfaces;
 using MarketPlacesApi.Models;
 using Microsoft.Extensions.Logging;

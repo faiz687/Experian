@@ -13,7 +13,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using MarketPlaces.Data.Repositories;
-using Microsoft.AspNetCore.Mvc;
 
 namespace MarketPlacesApi
 {
@@ -36,6 +35,7 @@ namespace MarketPlacesApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MarketPlacesApi", Version = "v1" });
             });
 
+            services.AddAutoMapper(typeof(Startup));
             services.AddApiVersioning();
             services.AddDbContext<MarketPlacesContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")));

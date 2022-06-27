@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketPlacesApi", "MarketPl
 		{3546A2E5-586A-4905-8E1F-65991EC426E5} = {3546A2E5-586A-4905-8E1F-65991EC426E5}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketPlaces.Data", "MarketPlaces.Data\MarketPlaces.Data.csproj", "{7FCFB9CD-24F7-4CBA-A342-6F409C5B015F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketPlaces.Data", "MarketPlaces.Data\MarketPlaces.Data.csproj", "{7FCFB9CD-24F7-4CBA-A342-6F409C5B015F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketPlaces.Entity", "MarketPlaces.Entity\MarketPlaces.Entity.csproj", "{3546A2E5-586A-4905-8E1F-65991EC426E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketPlaces.Entity", "MarketPlaces.Entity\MarketPlaces.Entity.csproj", "{3546A2E5-586A-4905-8E1F-65991EC426E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketPlaces.Tests", "MarketPlaces.Tests\MarketPlaces.Tests.csproj", "{C005302B-2F1D-4C63-BB24-91947D1EE7D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,10 @@ Global
 		{3546A2E5-586A-4905-8E1F-65991EC426E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3546A2E5-586A-4905-8E1F-65991EC426E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3546A2E5-586A-4905-8E1F-65991EC426E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C005302B-2F1D-4C63-BB24-91947D1EE7D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C005302B-2F1D-4C63-BB24-91947D1EE7D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C005302B-2F1D-4C63-BB24-91947D1EE7D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C005302B-2F1D-4C63-BB24-91947D1EE7D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

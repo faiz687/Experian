@@ -57,7 +57,7 @@ namespace MarketPlacesApi.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"An Error occured while finding card with error message :  {ex.Message}");
+                _logger.LogError(ex, $"An Error occured while finding card for applicant with error message :  {ex.Message}");
                 return result;
             }
         }

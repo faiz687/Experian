@@ -22,8 +22,9 @@ namespace MarketPlacesApi.Controllers
         private readonly ICardService _cardService;
         private readonly IApplicantService _applicantService;
 
-        public CardController(ILogger<CardController> logger, IQualificationService qualificationService, ICardService cardService, IApplicantService applicantService)
+        public CardController(ILogger<CardController> logger, IQualificationService qualificationService, ICardService cardService, IApplicantService applicantService,IMapper mapper)
         {
+            _mapper = mapper;
             _applicantService = applicantService;
             _cardService = cardService;
             _qualificationService = qualificationService;
@@ -37,6 +38,7 @@ namespace MarketPlacesApi.Controllers
             {
                 if (ModelState.IsValid && applicantDetailDto != null)
                 {
+                    //Eligibility check
                     var applicantEligibilityResult = _qualificationService.IsApplicantEligible(applicantDetailDto);
 
                     if (!applicantEligibilityResult.Success)
@@ -45,9 +47,10 @@ namespace MarketPlacesApi.Controllers
                         return Ok(response);
                     }
 
+                    //Find right Card
                     var applicantCardsResult = await _cardService.FindCards(applicantDetailDto);
 
-                    if (applicantCardsResult.Success && applicantCardsResult.value.Any())
+                    if (applicantCardsResult.Success )
                     {
                         Response response = new Response
                         {
@@ -56,8 +59,8 @@ namespace MarketPlacesApi.Controllers
                         };
 
                         //save data
-                        var applicant = _mapper.Map<Applicant>(applicantDetailDto);
-                        var applicantDbResult = _applicantService.SaveApplicantWithResults(applicant, applicantCardsResult.value);
+                        var applicant =  _mapper.Map<Applicant>(applicantDetailDto);
+                        var applicantDbResult = await _applicantService.SaveApplicantWithResults(applicant, applicantCardsResult.value);
                         
                         return Ok(response);
                     }

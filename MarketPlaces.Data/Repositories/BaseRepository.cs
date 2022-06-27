@@ -15,10 +15,10 @@ namespace MarketPlaces.Data.Repositories
             _context = context;
         }
 
-        public virtual async Task Add(TEntity entity)
+        public virtual async Task<int> Add(TEntity entity)
         {
             _context.Add(entity);
-            await _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync();
         }
 
         public virtual async Task<IEnumerable<TEntity>> GetAll()
@@ -44,9 +44,9 @@ namespace MarketPlaces.Data.Repositories
         }
 
         public void Dispose()
-        {  
-            _context.Dispose();
+        {
+             _context.Dispose();
         }
-          
+
     }
 }
