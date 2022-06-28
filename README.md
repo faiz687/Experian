@@ -1,7 +1,7 @@
 # Experian - Marketplaces
 
 ## pre-requisites
-1.SQL Server express
+1. SQL Server express
 
 
 
