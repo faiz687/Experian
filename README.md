@@ -42,7 +42,7 @@ An ASP.net core web API to find appropriate card for customer. Scroll to bottom 
 
 ## Improvements to the application
 1. Unit testing for services, repository and helper classes.
-2. adding comments on top of functions.
+2. Adding comments on top of functions or Documenting code.
 3. Not using magic numbers like 30,000 find a way to store them or use them more appropriately.
-4. defaulting to an API version if not found.
-5  Making all models inherit from a base model class.
+4. Defaulting to an API version if not found.
+5. Making all models inherit from a base model class.
