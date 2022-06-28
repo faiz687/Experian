@@ -8,8 +8,14 @@ An ASP.net core web API to find appropriate card for customer.
 Images 
 
 1. Making request without mandatory data.
-![](Images/Snip1.png)
+![Annual income Missing](Images/Snip1.png)
 
-1. Making request without mandatory data.
-![](Images/Snip1.png)
+![Date of Birth Missing](Images/Snip1.png)
+
+![Annual income Missing](Images/Snip1.png)
+
+
+2. Making request with incorrect versioning number.
+![Incorrect API version](Images/Snip11.png)
+
 
