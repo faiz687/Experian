@@ -9,5 +9,5 @@ Images
 
 1. Making request without mandatory data.
 
-![My animated logo](images/Snip1.png)
+![helklow](Images/Snip1.png)
 
