@@ -40,6 +40,14 @@ An ASP.net core web API to find appropriate card for customer. Scroll to bottom 
 
 
 
+## Improvements to the application
+1. Unit testing for services, repository and helper classes.
+2. adding comments on top of functions.
+3. Not using magic numbers like 30,000 find a way to store them or use them more appropriately.
+ 
+
+
+
 
 
 
