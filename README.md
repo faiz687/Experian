@@ -8,6 +8,8 @@ An ASP.net core web API to find appropriate card for customer.
 Images 
 
 1. Making request without mandatory data.
+![](Images/Snip1.png)
 
-![helklow](Images/Snip1.png)
+1. Making request without mandatory data.
+![](Images/Snip1.png)
 
