@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketPlaces.Data", "Market
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketPlaces.Entity", "MarketPlaces.Entity\MarketPlaces.Entity.csproj", "{3546A2E5-586A-4905-8E1F-65991EC426E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketPlaces.Tests", "MarketPlaces.Tests\MarketPlaces.Tests.csproj", "{C005302B-2F1D-4C63-BB24-91947D1EE7D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarketPlaces.Tests", "MarketPlaces.Tests\MarketPlaces.Tests.csproj", "{C005302B-2F1D-4C63-BB24-91947D1EE7D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
