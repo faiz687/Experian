@@ -1,6 +1,6 @@
 # Experian - Marketplaces
 
-An ASP.net core web API to find appropriate card for customer.
+An ASP.net core web API to find appropriate card for customer. Scroll to bottom of the page to read improvements or to-do that can be made to the application.
 
 ## pre-requisites
 1. SQL Server express
