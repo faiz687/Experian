@@ -26,5 +26,22 @@ An ASP.net core web API to find appropriate card for customer.
 ###### 3. Annual income above 30000.
 ![Incorrect API version](Images/Snip6.png)
 
+###### 3. Marketplaces Database.
+![Incorrect API version](Images/Snip7.png)
+
+###### 3. Applicant detail table saving applicant details.
+![Incorrect API version](Images/Snip8.png)
+
+###### 3. Applicant results that were shown with their card results.
+![Incorrect API version](Images/Snip9.png)
+
+###### 3. All cards available on the system.
+![Incorrect API version](Images/Snip10.png)
+
+
+
+
+
+
 
 
